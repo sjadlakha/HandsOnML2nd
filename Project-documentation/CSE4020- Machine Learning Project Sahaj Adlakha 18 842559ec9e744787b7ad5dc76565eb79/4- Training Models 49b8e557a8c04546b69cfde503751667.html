@@ -1,0 +1,663 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>4- Training Models</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="49b8e557-a8c0-4546-b69c-fde503751667" class="page sans"><header><img class="page-cover-image" src="https://www.technovature.com/06bd08994221c12cc5490b233cba0f3c/machine-learning.svg" style="object-position:center 43.94%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://qph.fs.quoracdn.net/main-qimg-8b6402fbf6c4d008d39e2a6de59f9ed6"/></div><h1 class="page-title">4- Training Models</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><nav id="5c48af3d-c6af-4b48-afc2-1e0d11264db1" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e2253739-c421-4dbf-99ce-1199983106d7"><mark class="highlight-red">Linear Regression</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#265ef943-62d9-4e44-a205-ba2abb36727a"><mark class="highlight-yellow">The Normal Equation</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a24a9150-45d0-4120-b9bd-1a2682a2333d"><mark class="highlight-red">Gradient Descent</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#390453d8-2910-4dac-8b0a-2542bc4b2d6f"><mark class="highlight-yellow">Batch Gradient Descent</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#35068f9d-8d18-4ef9-a322-6d335b841b7d"><mark class="highlight-yellow">Stochastic(Random) Gradient Descent</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8aee896e-8d97-4a8d-8bf3-707c8a94c76d"><mark class="highlight-yellow">Mini Batch Gradient Descent</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8c3e4780-eb7d-4fb9-b0a9-8f41381cb8ca"><mark class="highlight-red">Polynomial Regression</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b57eea60-476d-4c64-8f14-9e4c71d9a080"><mark class="highlight-teal">Bias/ Variance Trade-off</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e0f3666d-8d7b-479b-a87e-539b4c4d916d"><mark class="highlight-red">Regularized Linear Models</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1992770f-b00b-4633-a95d-b5c16e4262bb"><mark class="highlight-yellow">Ridge Regression</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#16d4c72e-505a-4159-8ccf-5f7a3ae86933"><mark class="highlight-yellow">Lasso Regression</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#102b0b83-ac91-4a97-921f-36fcb06e934c"><mark class="highlight-yellow">Elastic Net</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#17802b30-adb5-4762-b67f-34bff149999b"><mark class="highlight-blue">Which Regressor to choose ?</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c85b804c-7136-480a-865c-86c37b42bc72"><mark class="highlight-blue">Early Stopping Regularization</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#26e7dd42-429c-49a7-86d1-12b06780b89c"><mark class="highlight-red">Logistic Regression</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3e679f34-d824-4882-ab8c-1fc30ca37eb6"><mark class="highlight-yellow">Estimating Probabilities</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#477dbe0b-b59d-4073-a116-e8499c2da01f"><mark class="highlight-yellow">Decision Boundaries</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f71fedbd-ae4c-49a4-9337-18c6fc7409ee"><mark class="highlight-red">Softmax Regression or Multinomial Logistic Regression</mark></a></div></nav><h1 id="e2253739-c421-4dbf-99ce-1199983106d7" class=""><mark class="highlight-red">Linear Regression</mark></h1><p id="c99226d1-5219-4526-bc3b-b8a77c22c23b" class="">→ Makes a prediction by simply computing a weighted sum of the input features, plus a constant called the bias term(intercept)</p><p id="3ff62d03-242a-42af-a6be-4e15bd8d277d" class="">
+</p><p id="63023037-cf9f-4baf-99bc-482c9569a3a2" class="">→ a Cost function is associated ⇒ Mean square error</p><h2 id="265ef943-62d9-4e44-a205-ba2abb36727a" class=""><mark class="highlight-yellow">The Normal Equation</mark></h2><p id="ceaa3979-7cb5-4c4c-9e21-7a6e3c3e7aa1" class="">the normal equation is a mathematical equation that gives the value of the parameters vector that minimizes the cost function in a closed form solution directly.</p><figure id="e7af819b-8fc9-4de0-9313-b1ffeb457275" class="image"><a href="4-%20Training%20Models%2049b8e557a8c04546b69cfde503751667/Untitled.png"><img style="width:156px" src="4-%20Training%20Models%2049b8e557a8c04546b69cfde503751667/Untitled.png"/></a></figure><p id="6573165e-06a0-4ec8-8c97-f53b96953b07" class="">Here LHS = the value of the parameters vector that minimizes the cost function and y = vector of target values</p><p id="e090c042-2dcd-4d8b-8261-bb64f0a69ba5" class="">
+</p><p id="136a44f6-5b32-407a-928b-fd84507bc5d0" class="">⇒ Computational Complexity: <div class="indented"><ul id="a08c6670-1e37-4f09-bef1-df2f91eec613" class="bulleted-list"><li>There are 2 approaches to find the minimum cost vector<ul id="3b260e0d-5c35-4087-bc72-86dc385e65e6" class="bulleted-list"><li>1 - normal equation</li></ul><ul id="c963cc62-6b9b-4d08-ac81-cb42d84eab75" class="bulleted-list"><li>2 - Singular Value Decomposition</li></ul></li></ul><ul id="dbb6515e-3613-4f66-a109-f86bdde801fb" class="bulleted-list"><li>Both the approaches get very slow when the number of features grow large (100000+)</li></ul><ul id="7c03d84c-c8db-4cbe-90fb-091a1ff8a14a" class="bulleted-list"><li>But they are linear with respect to the number of instances in the dataset</li></ul></div></p><p id="5906f3c0-2430-49eb-b808-4610f6b59ac6" class="">
+</p><h1 id="a24a9150-45d0-4120-b9bd-1a2682a2333d" class=""><mark class="highlight-red">Gradient Descent</mark></h1><ul id="dd21da60-5917-4dda-aee7-de263b0459ba" class="bulleted-list"><li>A generic optimization algorithm</li></ul><ul id="967601c1-7b71-4abb-b798-f5cc509a9633" class="bulleted-list"><li>Idea: iteratively tweak the parameters to minimize a cost function</li></ul><p id="5990ee16-df00-436a-85af-f2c6d2959b51" class="">⇒ Important Hyperparameter:<div class="indented"><p id="5cc841b6-47cb-4a41-8302-6bf23eaf8d58" class="">→<mark class="highlight-pink"> </mark><mark class="highlight-teal">Learning Rate:</mark></p><ol id="9fe6e60a-90c4-41e4-9e4b-d8c4fcce022b" class="numbered-list" start="1"><li>Learning rate too small = Too many iterations to converge , hence will take a longer time.</li></ol><ol id="0926f0ff-c073-4611-810b-51bbb985745f" class="numbered-list" start="2"><li>Learning rate too high = Chances of jumping across the valley, hence might <span style="border-bottom:0.05em solid">diverge</span> the algorithm</li></ol><p id="9e6cfb54-11be-40d4-afdf-20cd3ff797e0" class="">
+</p></div></p><ul id="b381c387-6966-4535-a115-c7407982b3a0" class="bulleted-list"><li>Random Initilaization can lead to cases when the algo reaches a local minima and stops.</li></ul><p id="11383d5b-fe57-4879-a12d-324322589f0d" class="">
+</p><ul id="304eaf73-62d7-40f7-9be3-77692f16bda0" class="bulleted-list"><li>For Linear Regression the cost function is convex function.<ul id="dadb20d2-9c2a-4a1c-a328-e18bd91a432c" class="bulleted-list"><li>No local minimas</li></ul><ul id="8a5cb88a-e424-4377-b5b7-c87c247cc6ec" class="bulleted-list"><li>Continuous function with no abrupt changes</li></ul><p id="9b19d3c6-ae76-401e-b1d0-0c7e05ec66a2" class="">
+</p></li></ul><blockquote id="a506b0d3-082c-41e8-80ea-becf12bf5bc4" class="">Important: When using GD, make sure that the features have a similar scale, otherwise it will take longer time to learn.</blockquote><p id="fceef83e-232d-496a-a7f3-8fd1be469bb1" class="">
+</p><h2 id="390453d8-2910-4dac-8b0a-2542bc4b2d6f" class=""><mark class="highlight-yellow">Batch Gradient Descent</mark></h2><ul id="a5e83eac-1e5c-45f9-b9d6-149565085d6c" class="bulleted-list"><li>Uses the whole batch of training data at every step</li></ul><ul id="9510647a-9bd1-4454-be8f-c250c9dee3e2" class="bulleted-list"><li>Terribly slow on very large training data</li></ul><ul id="0fd5d720-f1ee-45f6-ba98-f8319a2c7a42" class="bulleted-list"><li>One big problem is to decide how many iterations are enough<ul id="3dc54ef5-8ae8-47af-b4ab-756150894707" class="bulleted-list"><li>Solution: Early stopping: Stop when the gradient vector becomes tiny ( tolerance ) . This happens when GD has (almost) reached the minimum</li></ul></li></ul><p id="89a2ee4a-2f82-4e7b-9ffa-dbcb92ff7dcf" class="">
+</p><h2 id="35068f9d-8d18-4ef9-a322-6d335b841b7d" class=""><mark class="highlight-yellow">Stochastic(Random) Gradient Descent</mark></h2><ul id="960d8544-1d12-4914-87cf-f48dcf75ea4d" class="bulleted-list"><li>Picks a random instance in the training set at every step</li></ul><ul id="91d041ff-a1cb-451c-b588-a7d7e6fa8271" class="bulleted-list"><li>Very fast</li></ul><ul id="97248fd8-4dad-4fcc-acea-0d84760141dc" class="bulleted-list"><li>Can train on large datasets</li></ul><p id="122f376f-73d9-42f1-a048-2a8559089069" class="">Drawbacks:</p><ul id="ce8ce1a4-a023-4798-a219-539e381c5162" class="bulleted-list"><li>Much less regular than B-GD</li></ul><ul id="c302156d-d4b2-4e5f-8714-2abe9b2685e9" class="bulleted-list"><li>Therefore hopes around a lot, decreasing only on average. (because of randomness)</li></ul><ul id="ad465dde-84e5-4c6f-aad3-03a1acd3680b" class="bulleted-list"><li>It will get close to minimum but will not settle down and keep bouncing .</li></ul><ul id="808298f9-3514-4adc-a0e7-3d39c1b86880" class="bulleted-list"><li>So once the algo stops, it will give us good param values but not optimal.</li></ul><ul id="5f0272cf-3094-4a99-859e-d33a9a5effc0" class="bulleted-list"><li>Final parameter values are good but not optimal</li></ul><p id="1433e638-9c5e-4d43-ac84-fb63cec99545" class="">Advantage:</p><ul id="b52ae02f-dd9b-4938-8c41-df287b6a6edb" class="bulleted-list"><li>If the cost fn is irregular, it would be more likely top bounce out of the local minima</li></ul><ul id="a5325407-eae7-4270-887c-1cd346aef26b" class="bulleted-list"><li>Hence more likely to find global minima</li></ul><p id="b20d868a-5d7f-4f67-85f5-b8949d5bbeea" class="">
+</p><p id="1edb3c24-9f65-4017-84bd-fa90123e2025" class=""><span style="border-bottom:0.05em solid"><em>→ The algorithm will never settle at the minimum</em></span></p><p id="016d77c1-ab10-4aa5-9761-715306b39882" class=""><strong>Solution</strong></p><p id="4db3eedb-5b7c-40aa-8013-c742e34dc3e4" class=""><span style="border-bottom:0.05em solid"><mark class="highlight-blue">Simulated Annealing</mark></span> using a learning schedule(function):</p><p id="fd31ff65-12b3-4599-a485-4caee508c3ef" class="">Decrease the learning rate as per the learning schedule after each epoch.</p><p id="07a4551b-d711-4e82-b8b8-85c0f7e162b7" class="">Large learning rate will help in skipping local minimas and small learning rate will help in converging earlier.</p><p id="19300092-c154-4a93-9278-cbe082fec80f" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2bce8af5-2e2f-4e12-8710-ef3f735edccc"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><strong>Don&#x27;t forget to shuffle the training data after each epoch to avoid same instance being picked up again.
+i.e. the instances should be independent and identically distributed.</strong></div></figure><p id="bcbc88d3-26f2-415a-928b-f79f73705bdd" class="">
+</p><h2 id="8aee896e-8d97-4a8d-8bf3-707c8a94c76d" class=""><mark class="highlight-yellow">Mini Batch Gradient Descent</mark></h2><ul id="88dc2012-b97f-4a18-84be-475978a985d4" class="bulleted-list"><li>Computes gradients on small randoms sets of instances called mini batches.</li></ul><ul id="da7db027-7e59-431f-a202-81b824a38446" class="bulleted-list"><li>Main advantage is : performance boost from hardware optimization of matrix operations, especially when using GPUs</li></ul><ul id="73f59e89-68a7-4454-ab4b-c971553978b0" class="bulleted-list"><li>It will walk closer to the minimum</li></ul><ul id="4b50fab1-07f8-4ea0-b3e2-888c2dfa577a" class="bulleted-list"><li>But it may be harder for it to escape from local minima problem</li></ul><p id="bfa9cb5d-44b8-4a80-9e43-83db34f2fb31" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c4c778d-6f56-48ed-b99c-14d98b894c01"><div style="font-size:1.5em"><span class="icon">👉🏻</span></div><div style="width:100%">There is almost no difference after training. All these algorithms end up with very similar models and make exactly same predictions.</div></figure><p id="3d71c62a-439d-4f95-be0c-490aca020499" class="">
+</p><h1 id="8c3e4780-eb7d-4fb9-b0a9-8f41381cb8ca" class=""><mark class="highlight-red">Polynomial Regression</mark></h1><p id="8395c189-b5ba-4fdd-91f7-314ed84d95af" class="">⇒ In a Nutshell</p><p id="648d3908-3114-47bf-a2a9-f4e78cf6ccce" class="">Add powers of each feature as new features, then train a linear model on this extended set of features.</p><ul id="d6601d5b-cc09-470a-85a7-097b65a0f32c" class="bulleted-list"><li>Features can be generated with the help of <code>sklearn.preprocessing.PolynomialFeatures</code></li></ul><p id="8ffd0405-a8c5-411c-81f7-ee8c57cdb51e" class="">
+</p><p id="0fad34fa-76b3-4f19-861d-b83cb7110477" class="">The polynomial features function <span style="border-bottom:0.05em solid">adds all combinations of the features upto the given degree</span><div class="indented"><p id="6eedc95a-7967-44ee-b634-201f7a7eeded" class="">eg. features = a,b and degree=2</p><p id="5c93e872-65ef-4db0-b5a2-f24d63be86b7" class="">Combinations added: a^2, b^2, a*b</p><p id="6bab75f0-5df4-4bac-8d71-d818ce5bb05e" class="">
+</p></div></p><h2 id="b57eea60-476d-4c64-8f14-9e4c71d9a080" class="block-color-teal"><mark class="highlight-teal">Bias/ Variance Trade-off</mark></h2><p id="1bde7f9e-3765-4b48-a62c-10f73e3695e7" class="">Bias </p><ul id="7ff6c336-7516-49e6-a2f4-fa1294306abd" class="bulleted-list"><li>part of generalization error due to wrong assumptions (like that the data is linear when it is actually not)</li></ul><ul id="c7732a9b-c3f2-480a-b895-e355f166fe94" class="bulleted-list"><li>High-bias model most likely underfits the training data</li></ul><p id="ba5f0ebd-e7e1-4f3e-aa6c-2d9adb300cbe" class="">
+</p><p id="ecf7763b-a4d4-44d0-b16e-5e2f54cb1dd3" class="">Variance</p><ul id="718af212-9a98-48a6-a546-9ec5008a4202" class="bulleted-list"><li>Part of generalization error due to model&#x27;s excessive sensitivity to variations.</li></ul><ul id="4de70370-8e80-4d1a-96b9-3bccb5bf6485" class="bulleted-list"><li>Model with many degrees of freedom is likely to have high variance</li></ul><ul id="ba545c44-307a-4676-b204-63c44aa9dc6c" class="bulleted-list"><li>High variance ⇒ Overfits the training data.</li></ul><p id="51ca6001-8ef4-41a2-b042-fdc008aeb643" class="">
+</p><p id="8c610555-41e6-4a99-9c1f-680950979911" class="">⇒ Increasing a model&#x27;s complexity will typically increase its variance and reduce its bias.</p><p id="991ecd59-c335-4cef-a1ff-a758add04d6d" class="">⇒ Conversely, reducing its complexity will increase the bias and decrease its variance.</p><p id="04ae4b32-9d73-4003-bcc4-8a013fe5088b" class="">
+</p><h1 id="e0f3666d-8d7b-479b-a87e-539b4c4d916d" class=""><mark class="highlight-red">Regularized Linear Models</mark></h1><ul id="2fccf7c7-a51a-4d3a-99d7-74ce657ec653" class="bulleted-list"><li>Fewer the degrees of freedom, lesser the chances of overfitting training data</li></ul><ul id="1d2a3d60-8b93-4503-81ac-c290db3bedda" class="bulleted-list"><li>Regularize to prevent overfitting</li></ul><p id="5c489667-cee0-47ca-812d-76c4f4244092" class="">
+</p><h2 id="1992770f-b00b-4633-a95d-b5c16e4262bb" class=""><mark class="highlight-yellow">Ridge Regression</mark></h2><ul id="55e45660-890c-49e8-8159-01f9fcd39fac" class="bulleted-list"><li>Regularized version of Linear Regression<ul id="b3d06f66-6f1b-4e00-877f-f1f25bd10595" class="bulleted-list"><li>A regularization term is added to the cost function</li></ul><ul id="3e6e6d3a-6b9e-4868-93e7-e085ce9afbef" class="bulleted-list"><li>Keeps the weights as small as possible and also forces to fit the data</li></ul><ul id="594d5067-0feb-4f2f-a442-94157d0bb53b" class="bulleted-list"><li>Added only during training</li></ul><ul id="7a75dc5c-d6bc-4999-9ddb-0d34e5527495" class="bulleted-list"><li>Hyperparameter = alpha : controls the extent of regularization desired</li></ul><p id="000e6cf1-db03-44f4-844e-09c1cf4b7768" class="">
+</p></li></ul><h2 id="16d4c72e-505a-4159-8ccf-5f7a3ae86933" class=""><mark class="highlight-yellow">Lasso Regression</mark></h2><p id="9657166e-8c54-4d5e-b360-2aca4e44bb29" class=""><strong>Least Absolute Shrinkage and Selection Operator Regression</strong></p><ul id="a49cf5b4-b816-4b4e-83eb-e27daf54db23" class="bulleted-list"><li>Regularization term uses l1 norm of the weight</li></ul><ul id="22454759-8984-4f99-9da4-ec616aa10151" class="bulleted-list"><li>It tends to remove the weights of least important features by setting them to 0</li></ul><ul id="27c4e5b1-badf-40c5-b1af-545c7cc370a6" class="bulleted-list"><li>In other words, it performs <strong>feature selection</strong> and outputs a sparse model</li></ul><p id="6ba42f91-4bb9-4404-8da8-f7711d7b2f6c" class="">
+</p><h2 id="102b0b83-ac91-4a97-921f-36fcb06e934c" class=""><mark class="highlight-yellow">Elastic Net</mark></h2><ul id="638d4a82-1580-47ff-ac6c-4881fb8d4394" class="bulleted-list"><li>A middle ground between ridge and lasso</li></ul><ul id="1ecec891-6157-4eb1-bd95-d2c2d091b034" class="bulleted-list"><li>Regularization term is a mix of l1 and l2</li></ul><ul id="f9bb1de6-09ef-47c1-ac3f-f448d87d86db" class="bulleted-list"><li>The mix ratio (r) can be controlled<ul id="fbc9bc6a-8e5e-45b4-af73-c4a9bb7d5337" class="bulleted-list"><li>r=0: ridge regressin</li></ul><ul id="801a285e-a54a-46aa-97e4-1f7057368aca" class="bulleted-list"><li>r=1: lasso regression</li></ul></li></ul><p id="166c86c3-ed2c-4d43-bb9d-9a29b67585e2" class="">
+</p><h2 id="17802b30-adb5-4762-b67f-34bff149999b" class=""><mark class="highlight-blue">Which Regressor to choose ?</mark></h2><ul id="475362c4-98ca-4776-8673-accfa6bbb430" class="bulleted-list"><li>Preferred to have at least some regularization in anyone you choose</li></ul><ul id="fd5fb05c-fa1d-4cab-9a9e-a44ca81a7775" class="bulleted-list"><li>Ridge is a good default</li></ul><ul id="b899190b-8d33-4310-a041-97aaca4857ea" class="bulleted-list"><li>But when u know that only some features are important then go for Lasso / ElasticNet</li></ul><ul id="fc22e191-6633-49c2-bb03-4b0a95abcbcb" class="bulleted-list"><li>Elastic net are preferred over lasso because lasso may behave erratically when the number of features is greater than the number of training instances or when several features are strongly correlated</li></ul><p id="abe27fd6-61bd-443e-b767-f948561d4bcb" class="">
+</p><h2 id="c85b804c-7136-480a-865c-86c37b42bc72" class=""><mark class="highlight-blue">Early Stopping Regularization</mark></h2><ul id="00dc0fc0-266c-4278-a0ce-aa0fb036a821" class="bulleted-list"><li>&quot;beautiful free lunch&quot; : Geoffrey Hinton</li></ul><ul id="db57a9bf-1889-4d47-9870-b2adf872ee64" class="bulleted-list"><li>stop training as soon as the val error reaches a min</li></ul><ul id="530284e8-5cf2-486a-aaa2-bb7cfbacdc68" class="bulleted-list"><li>in SGD or MBGD, the curves will not be smooth and finding the point to stop will be difficult<ul id="6578e9e0-fd02-43e1-9af2-6217a8ce30fa" class="bulleted-list"><li>one approach is to stop after some time of reaching the minimum then roll back to that config of params</li></ul></li></ul><p id="4bd00be7-fcb2-4898-9702-2b2c6186c37d" class="">
+</p><h1 id="26e7dd42-429c-49a7-86d1-12b06780b89c" class=""><mark class="highlight-red">Logistic Regression</mark></h1><ul id="62b0acd7-1e88-45ae-9ad6-5f0475bdb6bb" class="bulleted-list"><li>Binary Classifier</li></ul><ul id="3ff695a9-57fa-4f10-bf39-5d348625d789" class="bulleted-list"><li>Calculates probability of belonging to a class</li></ul><p id="0ad8842f-d317-4c01-99ac-a323ec7cf881" class="">
+</p><h2 id="3e679f34-d824-4882-ab8c-1fc30ca37eb6" class=""><mark class="highlight-yellow">Estimating Probabilities</mark></h2><ul id="21ffdb93-aa01-482a-817c-74f062ecf103" class="bulleted-list"><li>Works similar to a linear regression model, just outputs the logistic of the weighted sum of inputs</li></ul><ul id="3685b932-4d1c-4c15-9c49-26566ce2165f" class="bulleted-list"><li>Logistic is the sigmoid function</li></ul><p id="f61ce0bc-82f6-421f-b5fc-90a6021ca13c" class="">
+</p><ul id="46d627d5-a06a-4c29-a5db-9a0fdc982c0a" class="bulleted-list"><li>It has a cost function associated with it in order to train and improve</li></ul><ul id="76b8f239-825f-42dd-8c19-b5edc178bb34" class="bulleted-list"><li>You can use Any gradient descent technique to train the model and tune the parameters</li></ul><p id="4231ab6a-9a76-4076-8c49-eba29e2d57df" class="">
+</p><h2 id="477dbe0b-b59d-4073-a116-e8499c2da01f" class=""><mark class="highlight-yellow">Decision Boundaries</mark></h2><ul id="6bfe66b2-fc62-442f-bdd5-564a0ff960a1" class="bulleted-list"><li>Probability of the classes equal to 50% each</li></ul><p id="e788f2e0-67e4-4b46-9169-c24c4f9110d7" class="">
+</p><ul id="c808cce8-5561-41ae-93bd-d822274f52e3" class="bulleted-list"><li>Just Like other models, Logistic regression can also be regualrised using l1 and l2 norms</li></ul><ul id="53bb054a-3bc0-4852-8e1f-eaf58aa141ee" class="bulleted-list"><li>Sklearn adds a l2 penalty by default<ul id="990751bd-f381-404c-b4a3-801a6d420e1e" class="bulleted-list"><li>Hyperparameter controlling the extent of regularization is C that is inverse of alpha i.e. higher the value of C , the less the model is regularized</li></ul></li></ul><p id="ba76259e-7b78-48f6-bc50-3faef45f0b28" class="">
+</p><p id="30e375ea-c06e-47a8-b136-c996969c2990" class="">
+</p><h1 id="f71fedbd-ae4c-49a4-9337-18c6fc7409ee" class=""><mark class="highlight-red">Softmax Regression or Multinomial Logistic Regression</mark></h1><ul id="37ebc618-28fe-49e5-b080-ade7ec913931" class="bulleted-list"><li>Generalised form of logistic regression to support multiple classes</li></ul><ul id="55d55a51-ffa8-4baf-9fe3-f4afa4e8448f" class="bulleted-list"><li>Computes a score s(x) for each class [scores are also called logits/log-adds (actually they are unnormalized log-odds)]</li></ul><ul id="959472a9-78c1-454a-9646-2901c6115282" class="bulleted-list"><li>estimates the probability of each class be applying softmax function (normalized exponential) to the scores</li></ul><p id="65e0ce16-9a98-4b67-8268-225fab7e5287" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1bf237ee-2ca7-4507-b175-b3818e6b437b"><div style="font-size:1.5em"><span class="icon">👉🏻</span></div><div style="width:100%">It predicts only one class at a time (i.e. not multioutput)</div></figure><p id="0f5b8d63-3670-4274-82bb-9845823ce389" class="">
+</p><p id="7a816b5c-65bd-4c06-801e-70c84af0f75e" class="">Cost Function used: </p><ul id="b7bf28b3-3841-496d-9725-5198e24800ed" class="bulleted-list"><li><span style="border-bottom:0.05em solid"><em>Cross Entropy</em></span><em>: Measures how well a set of probabilities matches the target classes.</em><ul id="c84f3d02-943b-4b1b-bec9-e5957ee31b0d" class="bulleted-list"><li>when the classes are 2 , the cross entropy function reduces to log-loss (Logistic regression loss function)</li></ul></li></ul><p id="1544a462-160c-4d27-8c99-c61bd7ac7cbc" class="">
+</p><p id="64068928-11bb-4398-903b-01524aba598f" class="">
+</p></div></article></body></html>

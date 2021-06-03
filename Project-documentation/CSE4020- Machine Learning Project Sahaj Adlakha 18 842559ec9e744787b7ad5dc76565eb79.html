@@ -1,0 +1,632 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CSE4020- Machine Learning Project 
+Sahaj Adlakha 18BCE0054
+&quot;Hands On Machine Learning with Scikit-Learn, Keras and Tensorflow&quot;</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="842559ec-9e74-4787-b7ad-5dc76565eb79" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1485796826113-174aa68fd81b?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 30.000000000000004%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://user-images.githubusercontent.com/835329/61048739-00edd100-a3e3-11e9-986b-d8db9f708273.png"/></div><h1 class="page-title">CSE4020- Machine Learning Project 
+Sahaj Adlakha 18BCE0054
+&quot;Hands On Machine Learning with Scikit-Learn, Keras and Tensorflow&quot;</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Name</th></tr></thead><tbody><tr id="2c79af21-b2ce-4f4e-9b26-857f313f3cd2"><td class="cell-title"><a href="CSE4020-%20Machine%20Learning%20Project%20Sahaj%20Adlakha%2018%20842559ec9e744787b7ad5dc76565eb79/1%20-%20The%20Machine%20Learning%20Landscape%202c79af21b2ce4f4e9b26857f313f3cd2.html"><img class="icon" src="data:image/png;base64,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"/>1 - The Machine Learning Landscape</a></td></tr><tr id="cca230bd-9543-4254-8c92-dc05486fc004"><td class="cell-title"><a href="CSE4020-%20Machine%20Learning%20Project%20Sahaj%20Adlakha%2018%20842559ec9e744787b7ad5dc76565eb79/2%20-%20End%20to%20End%20Machine%20Learning%20Project%20cca230bd954342548c92dc05486fc004.html"><img class="icon" src="https://res.cloudinary.com/springboard-images/image/upload/w_1080,c_limit,q_auto,f_auto,fl_lossy/wordpress/2019/02/sb-blog-ai.png"/>2 - End to End Machine Learning Project</a></td></tr><tr id="f35fcb0d-4f2e-4899-848c-2ec271e95acd"><td class="cell-title"><a href="CSE4020-%20Machine%20Learning%20Project%20Sahaj%20Adlakha%2018%20842559ec9e744787b7ad5dc76565eb79/3-%20Classification%20f35fcb0d4f2e4899848c2ec271e95acd.html"><img class="icon" src="https://static.javatpoint.com/tutorial/machine-learning/images/classification-algorithm-in-machine-learning.png"/>3- Classification</a></td></tr><tr id="49b8e557-a8c0-4546-b69c-fde503751667"><td class="cell-title"><a href="CSE4020-%20Machine%20Learning%20Project%20Sahaj%20Adlakha%2018%20842559ec9e744787b7ad5dc76565eb79/4-%20Training%20Models%2049b8e557a8c04546b69cfde503751667.html"><img class="icon" src="https://qph.fs.quoracdn.net/main-qimg-8b6402fbf6c4d008d39e2a6de59f9ed6"/>4- Training Models</a></td></tr><tr id="08505b6e-73ef-4ae9-a664-dfe7b63cffd5"><td class="cell-title"><a href="CSE4020-%20Machine%20Learning%20Project%20Sahaj%20Adlakha%2018%20842559ec9e744787b7ad5dc76565eb79/Github%20Repo%2008505b6e73ef4ae9a664dfe7b63cffd5.html"><img class="icon" src="https://github.githubassets.com/images/modules/open_graph/github-mark.png"/>Github Repo</a></td></tr></tbody></table></div></article></body></html>

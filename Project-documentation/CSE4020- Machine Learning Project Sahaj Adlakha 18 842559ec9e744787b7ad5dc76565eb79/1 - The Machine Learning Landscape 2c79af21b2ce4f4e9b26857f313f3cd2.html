@@ -1,0 +1,642 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1 - The Machine Learning Landscape</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2c79af21-b2ce-4f4e-9b26-857f313f3cd2" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1555255707-c07966088b7b?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 27.780000000000005%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="data:image/png;base64,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"/></div><h1 class="page-title">1 - The Machine Learning Landscape</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><nav id="51c72b77-2b13-4118-8ea7-547df2cddd8d" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c809e266-7890-4c26-8d20-a469a0b689d1">Types of Machine Learning Systems</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#776d31d2-01ad-4577-8ee6-bb0b27a5ba90">1. Supervised/ Unsupervised Learning</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ca51e9aa-57c6-4dfb-8db8-bc65e96de199">Supervised: </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ed7ddff7-406c-4ab0-ba7b-bc2e0ca602d4">Unsupervised Learning:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#31bbeb46-849f-4752-9234-797a6d7898d4">Semisupervised Learning:</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e5b671cd-bf37-4ffb-863a-5ae7abf90abc">Reinforcement Learning:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f75e1c3c-206c-424c-9743-3a0d5854fc5e">2. Batch and Online Learning</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#02b283ae-a91e-4cd0-b54d-04e53a90043c"><mark class="highlight-teal">Batch Learning:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1106780b-ffaa-4806-8fd2-da96e85015b5">Online Learning:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#94afc36b-92d4-4b4b-879e-32dc086c89f8"><mark class="highlight-red">3. Instance-Based vs. Model-Based Learning</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fab7e442-2ea7-4bf7-a8db-18162220a285"><mark class="highlight-teal">Instance Based Learning:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#09cc403e-b2c9-4f79-9268-a4a953ddac46"><mark class="highlight-teal">Model Based Learning:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#adf2fe2a-6e7b-4eec-ab22-0cc796262039">Main Challenges of Machine Learning </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#08ca85a8-c622-46a4-9787-e07eae36b939">1. Insufficient Quantity of Training Data</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#85a602e2-8731-46da-b46d-71d1e985823c">2. Non-representative Training Data</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#95de1c42-904f-49ea-af6b-b64446708133"><mark class="highlight-red">3. Poor-Quality Data</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dc2ee955-6a8a-4ba6-a682-212ab448b429"><mark class="highlight-red">4. Irrelevant Features</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ad59ba38-e333-4345-bde5-cf40df8ab628"><mark class="highlight-red">5. Overfitting the Training Data</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2badb3d9-c5ce-4ab2-a940-bcb50953e239">6.  Underfitting the Training Data</a></div></nav><h1 id="c809e266-7890-4c26-8d20-a469a0b689d1" class="">Types of Machine Learning Systems</h1><h2 id="776d31d2-01ad-4577-8ee6-bb0b27a5ba90" class="block-color-red">1. Supervised/ Unsupervised Learning</h2><h3 id="ca51e9aa-57c6-4dfb-8db8-bc65e96de199" class="block-color-teal">Supervised: </h3><ul id="25e909d1-41ed-43a0-a505-32c898d89058" class="bulleted-list"><li>Training set includes desired solutions called <em>labels.</em></li></ul><ul id="b7df479a-7c3d-4d07-9fc9-b806ba9c3b48" class="bulleted-list"><li>kNN</li></ul><ul id="c6a369eb-88af-4a27-bf76-aa33cc834e6c" class="bulleted-list"><li>Linear Regression</li></ul><ul id="cd99571a-229c-420a-ac86-5bd51627f218" class="bulleted-list"><li>Logistic Regression</li></ul><ul id="1665a5e8-5897-4757-a463-66aaf1fdf28a" class="bulleted-list"><li>SVMs</li></ul><ul id="f320e46f-87df-4704-90be-b453db774ca8" class="bulleted-list"><li>Decision Trees and Random Forests</li></ul><ul id="73c6d508-ad94-4b84-8dff-eca80bf15dda" class="bulleted-list"><li>Neural Networks</li></ul><p id="87b7e9a6-b169-4342-8dde-70c651b49990" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6cef9d4f-2a08-433a-92ae-7420422ad3d6"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Some Neural Networks can be unsupervised, such as auto-encoders. They can also be semi-supervised, such as deep belief networks and unsupervised pre-training</div></figure><p id="e8fe4958-ee16-4f6b-b9ea-8bf0200e6c9b" class="">
+</p><h3 id="ed7ddff7-406c-4ab0-ba7b-bc2e0ca602d4" class="block-color-teal">Unsupervised Learning:</h3><ul id="534dba1d-0925-49d3-8e0c-9f514abbd075" class="bulleted-list"><li>Training Data is unlabeled</li></ul><ul id="08bb49f3-c8ad-4426-bb25-a54894cd0579" class="bulleted-list"><li>Clustering</li></ul><ul id="b596e2a6-c84b-40ae-9577-55f7db38a23f" class="bulleted-list"><li>Anomaly Detection</li></ul><ul id="6992849b-15f4-44ba-ac7f-1ad83b049a18" class="bulleted-list"><li>Visualisation and dimensionality reduction</li></ul><ul id="00b36dd4-0b9d-412b-989f-8c320c5f4554" class="bulleted-list"><li>Association Rules</li></ul><p id="d0820ff0-adf8-4382-a61e-4fb51e13eb58" class="">
+</p><h3 id="31bbeb46-849f-4752-9234-797a6d7898d4" class="block-color-teal">Semisupervised Learning:</h3><ul id="3de8abd4-b8f8-4c90-b207-d85cd7ddcc89" class="bulleted-list"><li>Training data is partially labeled</li></ul><ul id="bb281082-d3ae-4934-9368-28efe01fbd0b" class="bulleted-list"><li>Application:<ul id="46e98926-c34c-4d7e-a923-e79905f72ecc" class="bulleted-list"><li>Photo-hosting service like Google Photos</li></ul></li></ul><ul id="fec90323-f21c-4b8a-bdad-196bd647f356" class="bulleted-list"><li>Combination of Supervised and Unsupervised Algorithms<ul id="8545941d-1ffc-4a50-8f72-08d01964ec09" class="bulleted-list"><li>Deep Belief Networks</li></ul></li></ul><p id="6b1fd69c-c94c-4347-b876-0e1398ed24d0" class="">
+</p><h3 id="e5b671cd-bf37-4ffb-863a-5ae7abf90abc" class="block-color-teal">Reinforcement Learning:</h3><ul id="3d818d21-a3cb-4a4d-b86c-265e22ed70cb" class="bulleted-list"><li>Learning System a.ka. AGENT: observes the environment, select and perform actions</li></ul><ul id="0f0244bd-6939-471f-9c06-1926b351d80b" class="bulleted-list"><li>Gets REWARDS in return .</li></ul><ul id="d2120586-ef92-4c30-83f1-f48380c8fda1" class="bulleted-list"><li>It must then learn itself what is the best strategy , called a POLICY.</li></ul><figure id="8f46f6ea-0929-493d-8b81-3a9ef5f5bbf2" class="image"><a href="https://www.kdnuggets.com/images/mathworks-reinforcement-learning-fig1-543.jpg"><img src="https://www.kdnuggets.com/images/mathworks-reinforcement-learning-fig1-543.jpg"/></a><figcaption>ANALOGY</figcaption></figure><p id="ee57b2fd-b4f0-4ad1-b8e8-209c5ba97851" class="">
+</p><h2 id="f75e1c3c-206c-424c-9743-3a0d5854fc5e" class="block-color-red">2. Batch and Online Learning</h2><p id="8f0e5285-ee9b-419d-9745-6b3816158f36" class="">Based on whether or not the system can learn incrementally from a stream of incoming data.</p><h3 id="02b283ae-a91e-4cd0-b54d-04e53a90043c" class=""><mark class="highlight-teal">Batch Learning:</mark></h3><ul id="2de7d5e6-bf34-4c21-b376-2a77cee96b42" class="bulleted-list"><li>Incapable of learning incrementally </li></ul><ul id="791d3bb1-c40a-4a13-b82e-2e322c8b29a1" class="bulleted-list"><li>Train the model with the entire data then push to production environment.</li></ul><ul id="7843fef9-3980-4425-bda7-b4a5e612af21" class="bulleted-list"><li>Any change in the training data will force you to repeat this step (but it can be automated easily)</li></ul><ul id="e1968357-9c74-4789-84dd-1e7e8c7b2c5e" class="bulleted-list"><li>- takes a lot of time and computing resources</li></ul><ul id="d1d8ba0c-46d1-43bf-9f79-0c2710e51b1f" class="bulleted-list"><li><em>Offline Learning</em></li></ul><p id="13219376-7552-4d44-8c38-0acabd956719" class="">
+</p><blockquote id="f65000f0-a6c4-4f44-bf76-57e411559d3f" class="">To adapt to changing data we need a more reactive solution 👇🏻</blockquote><h3 id="1106780b-ffaa-4806-8fd2-da96e85015b5" class="block-color-teal">Online Learning:</h3><ul id="13779a2e-95fc-40ed-9806-23c0cc9b56e4" class="bulleted-list"><li>Model is fed the data sequentially, either individually or in small groups called <em>mini-batches.</em></li></ul><ul id="4b235598-4315-4cab-8157-de20621e10dd" class="bulleted-list"><li>+ Each learning step is fast  and cheap.</li></ul><ul id="50194bc2-a483-48e0-875f-a51e0e7535d0" class="bulleted-list"><li>+ It can learn on the fly</li></ul><ul id="d4919799-4ebf-4e32-ac68-31d65e3a103d" class="bulleted-list"><li>- If bad data is  fed into the  algorithm then the performance will decrease gradually in production environment.</li></ul><p id="4cc3ca55-c27e-401a-aab4-206cc6c3db19" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="47cef648-73eb-4d3a-8329-f65b3e625c98"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-yellow_background">OUT OF CORE LEARNING </mark>: Online learning algorithms can also be used to train system that cannot fit in one machines main memory. The algorithm loads part of the data and runs a training step on the data and repeats the process until it has ran all of the data.</div></figure><p id="ea65eb62-c3c4-4570-8b00-73d0c70e9e40" class="">
+</p><h2 id="94afc36b-92d4-4b4b-879e-32dc086c89f8" class=""><mark class="highlight-red">3. Instance-Based vs. Model-Based Learning</mark></h2><ul id="938c9800-52c0-4a98-92a8-df3cc1d7dd30" class="bulleted-list"><li>Based on how the algorithms generalize.</li></ul><h3 id="fab7e442-2ea7-4bf7-a8db-18162220a285" class=""><mark class="highlight-teal">Instance Based Learning:</mark></h3><ul id="88fd18c2-30d1-4634-ac59-99b423d426c4" class="bulleted-list"><li>Learn the examples by heart</li></ul><ul id="5f8504f7-9c1a-4aad-a632-7c4b50c7a9f9" class="bulleted-list"><li>Generalize on new instances based on a similarity  measure</li></ul><p id="039ef622-1ed5-443b-a940-fbdecf1c9632" class="">
+</p><h3 id="09cc403e-b2c9-4f79-9268-a4a953ddac46" class=""><mark class="highlight-teal">Model Based Learning:</mark></h3><ul id="e2611880-3879-4122-9842-9f2cbdd52f81" class="bulleted-list"><li>Build a model based on the examples</li></ul><ul id="28e19d5a-30b9-4eb5-83de-26e480c06aad" class="bulleted-list"><li>Use this model to predict new-instances.</li></ul><p id="f92021ec-3214-4363-84bd-0eabcdfc7d90" class="">⇒ Important Step is <em>Model-Selection </em><div class="indented"><p id="3229ba82-0a43-4e9a-a451-8351c1819ffe" class="">→ Compare models based on the cost function</p><p id="d21e63e5-e700-44b7-9c2f-54ff5e83de0b" class="">
+</p></div></p><p id="4259dfdf-5366-4c45-bd61-c88724e4aace" class="">
+</p><h1 id="adf2fe2a-6e7b-4eec-ab22-0cc796262039" class="">Main Challenges of Machine Learning </h1><h2 id="08ca85a8-c622-46a4-9787-e07eae36b939" class="block-color-red">1. Insufficient Quantity of Training Data</h2><ul id="e449c979-5bd7-45ad-9458-fd330a97fd93" class="bulleted-list"><li>Machine Learning requires a lot of data for most of the algorithms to train.</li></ul><ul id="7d7a287c-0f56-4605-aad4-885d93e3c6c8" class="bulleted-list"><li>Even a simple problem requires thousands of examples.</li></ul><ul id="3c3c3e40-4425-4dcc-8ff7-e30fad953c85" class="bulleted-list"><li>Complex Problems like image recognition requires millions of examples.</li></ul><p id="cded55c2-8a90-406d-8177-ff795c45d169" class="">
+</p><h2 id="85a602e2-8731-46da-b46d-71d1e985823c" class="block-color-red">2. Non-representative Training Data</h2><ul id="ec5fe281-b9c4-4d87-af25-4c76e8e298e4" class="bulleted-list"><li>Crucial to use a training set that is representative of the cases you want to generalize to.</li></ul><ul id="5a120a40-8364-496f-9a00-5f4cf2095a8d" class="bulleted-list"><li>Too small sample ⇒ <span style="border-bottom:0.05em solid"><em>Sampling noise(non-representative data as a result of chance)</em></span></li></ul><ul id="538b54be-9785-4f19-96df-182e73f352c6" class="bulleted-list"><li>But even large samples can be non-representative if sampling method is flawed⇒ <span style="border-bottom:0.05em solid"><em>Sampling bias</em></span></li></ul><p id="43dee654-2a51-455c-ae81-c51f2e72a300" class="">
+</p><h2 id="95de1c42-904f-49ea-af6b-b64446708133" class=""><mark class="highlight-red">3. Poor-Quality Data</mark></h2><ul id="4a8601f8-035b-4fa8-9b07-97861fe99f5b" class="bulleted-list"><li>Outliers</li></ul><ul id="bbc779fb-9251-4412-86c1-adadf9c86e5e" class="bulleted-list"><li>Errors</li></ul><ul id="74ed4463-f686-444a-b087-35d9973d81a8" class="bulleted-list"><li>Noise</li></ul><ul id="95b65a34-b63c-497c-9b3d-704895dfee7d" class="bulleted-list"><li>Solution: Pre-processing</li></ul><h2 id="dc2ee955-6a8a-4ba6-a682-212ab448b429" class=""><mark class="highlight-red">4. Irrelevant Features</mark></h2><blockquote id="34338241-ca30-42d3-aac8-fa81fa8532f1" class="">Garbage in, Garbage out</blockquote><p id="520122ca-4d52-4d08-bc6b-e8fe3002b755" class=""><span style="border-bottom:0.05em solid"><em><strong>Feature Engineering</strong></em></span></p><ul id="ee2555ac-0f54-450a-904b-60c0e75f420f" class="bulleted-list"><li>feature selection</li></ul><ul id="c98e3cf5-8ac9-4ef0-adb0-563af8831adc" class="bulleted-list"><li>feature extraction</li></ul><ul id="dc1e1202-8f08-4a30-b45d-fcc01b89798b" class="bulleted-list"><li>creating new features by gathering new data</li></ul><h2 id="ad59ba38-e333-4345-bde5-cf40df8ab628" class=""><mark class="highlight-red">5. Overfitting the Training Data</mark></h2><ul id="ebea1828-fde9-4f00-96ee-063eb63f522e" class="bulleted-list"><li>Model performs well on training data but does not generalize well.</li></ul><ul id="3b3e4e22-0879-4fe1-bb0a-778105fa65bc" class="bulleted-list"><li>Happens when the model is too complex relative to the amount and noise of the training data.</li></ul><p id="384684f3-d833-4b9e-b462-944bd0a54ff8" class="">⇒ Regularization:<div class="indented"><p id="1b69fe15-2323-4377-a765-da8cef2b6899" class="">→Increase the degrees of freedom.</p><p id="13b7cae5-aa78-40e5-9a49-f75bd1d02273" class="">→ Amount of regularization depends on the hyperparameters</p></div></p><h2 id="2badb3d9-c5ce-4ab2-a940-bcb50953e239" class="block-color-red">6.  Underfitting the Training Data</h2><ul id="674a60c1-59be-4ea6-9c82-b97c3c52b45f" class="bulleted-list"><li>Model is too simple to understand the underlying structure of the data</li></ul><p id="1f4f70e7-0801-4c74-a8a9-0af11fce0fe4" class="">⇒ Fixes:</p><ol id="b40e20f2-b035-4572-9031-b9b9da598ad9" class="numbered-list" start="1"><li>More powerful model with  more parameters</li></ol><ol id="365f9e4c-7b7b-4be1-9dc2-5b001aea22ea" class="numbered-list" start="2"><li>feature engineering</li></ol><ol id="001ba850-e840-4ea9-ba4a-a75816f27553" class="numbered-list" start="3"><li>reduce the constraints on the model</li></ol><p id="5668f556-691a-4f87-b855-a813bb450074" class="">
+</p></div></article></body></html>

@@ -1,0 +1,647 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>3- Classification</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f35fcb0d-4f2e-4899-848c-2ec271e95acd" class="page sans"><header><img class="page-cover-image" src="https://miro.medium.com/max/1838/1*PM4dqcAe6N7kWRpXKwgWag.png" style="object-position:center 41.14%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://static.javatpoint.com/tutorial/machine-learning/images/classification-algorithm-in-machine-learning.png"/></div><h1 class="page-title">3- Classification</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><nav id="fb4415b8-e633-4782-b493-5f528530772e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#99d56ffb-1708-4c9c-9153-91ffcd7ed52b"><mark class="highlight-red">Training a Binary classifier</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#abcec2f8-6dbc-451e-b3ba-5e0261b1b9e1"><mark class="highlight-yellow">Stochastic Gradient Descent:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#091e71bb-14b9-49c9-8305-3e60787bbd85"><mark class="highlight-blue">Metrics for SGD:</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#151c2c28-8112-4261-8538-2e825d9cc32c"><mark class="highlight-yellow">Random Forest Classifier</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1df2d9c6-b6d6-4813-836f-e65016f6c2e8"><mark class="highlight-red">Multiclass/Multinomial Classification</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ac085e34-2137-47c4-8745-6247d8f64dd9"><mark class="highlight-red">Multilabel Classification</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7f33a29b-ce3d-4633-9a80-af97506d87a0"><mark class="highlight-yellow">k-Nearest Neighbours</mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7d1c50af-64cc-4be8-9e37-14417c0ee37a"><mark class="highlight-blue">→ Evaluation</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6e37cc8b-2759-4e20-a20b-9b16ce89ced7"><mark class="highlight-red">Multioutput Classification:</mark></a></div></nav><p id="959b9237-6925-4868-a17f-dd282dfd7451" class="">
+</p><p id="57abe5c6-93f4-4579-8451-a201ccb6e915" class="">Dataset : MNIST - number classification</p><ul id="4ffb8631-e460-4ba5-ad8b-aeac7003f082" class="bulleted-list"><li>Contains 70,000 small images of digits handwritten by high school students and employees of the US Census Bureau. </li></ul><ul id="5d5dbdde-6e23-4bf1-89fd-0bfc9b3cdcc2" class="bulleted-list"><li>Labelled dataset</li></ul><p id="d280cb5f-c668-4ab7-8391-bd1931c35f92" class="">
+</p><p id="3e9bfc80-a2ae-4ace-a20a-6696a2d5d2e7" class="">
+</p><h1 id="99d56ffb-1708-4c9c-9153-91ffcd7ed52b" class=""><mark class="highlight-red">Training a Binary classifier</mark></h1><p id="7df949de-c7a8-4b55-ac5b-0d711bd92719" class="">The 5 -detector </p><h2 id="abcec2f8-6dbc-451e-b3ba-5e0261b1b9e1" class=""><mark class="highlight-yellow">Stochastic Gradient Descent:</mark></h2><ul id="8f4b7188-866b-446d-bb22-2c2bf5fc5e2f" class="bulleted-list"><li>good for large dataset</li></ul><ul id="19146aef-463c-4083-b261-4fa1be0a2971" class="bulleted-list"><li>Deals with each instance independently (one at a time, therefore well suited for online learning)</li></ul><ul id="80b83e61-2427-47d5-b081-597370f5737e" class="bulleted-list"><li>Relies on randomness during training</li></ul><p id="725c25f6-a214-40f0-8c2c-623487e43911" class="">
+</p><h3 id="091e71bb-14b9-49c9-8305-3e60787bbd85" class=""><mark class="highlight-blue">Metrics for SGD:</mark></h3><ol id="92fdbf92-bfb0-47e8-9b93-a9e54c7ab128" class="numbered-list" start="1"><li>Cross validation<p id="e68a176b-0be6-44b2-a987-795888caf335" class="">→ Accuracy above 95%!!! (fishy)</p></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5b3e2b38-8979-4560-80ae-cb4aeb2eb70c"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Here the accuracy is over 95% seems great BUT actually the dataset is &quot;<em><span style="border-bottom:0.05em solid"><strong>skewed</strong></span></em>&quot; - number of instances of not-5 instances are 90%. Hence even a dumb classifier that says that everything is not-5 will have a 90% accuracy.
+Hence Accuracy is not always the correct measure</div></figure><p id="03a7018a-2532-44ca-a37d-fbef86680aab" class="">
+</p><p id="f4cf424d-2c79-4b52-8621-29ee025dfc42" class="">2.  Confusion Matrix<div class="indented"><p id="422c3b83-e091-44f6-a5c0-afa544c9725b" class="">→A perfect classifier would have only true positives and true negatives (non zero values only on non diagonal elements)</p></div></p><p id="dd9397e2-ec59-426b-816a-a6d657c11346" class="">
+</p><p id="30c21928-3833-41e0-b02b-58ae0d6a68f7" class="">3. Precision and Recall<div class="indented"><p id="5586f3a5-c6e0-43fb-8344-8df3bf2bdab9" class="">→Even precise metric</p><p id="544290bb-b228-4ce8-994b-77dc59e431c1" class="">→ F1 score = H.M of precision and recall (H.M. because it gives much more weights to low values)</p><p id="b59aa5e2-ce84-4b2d-a1bd-75e57d894513" class="">
+</p></div></p><blockquote id="8350bf87-86ba-46b0-bad4-19d7129e4b1c" class=""><mark class="highlight-teal">Precision/ Recall Trade-off</mark></blockquote><ol id="dd2f8a4b-e403-47bf-a09d-b9330d140ac2" class="numbered-list" start="1"><li>In applications, we need to consider precision (Restricted videos on Youtube) ⇒ less F.P. </li></ol><ol id="a27c9978-b752-472e-9b9a-898dda7db8e4" class="numbered-list" start="2"><li>In other cases we need to consider recall (Detecting disease in a patient) ⇒ less F.N. </li></ol><ul id="1b09f661-9778-4546-80ac-02af52066e0e" class="bulleted-list"><li>You can’t have both precision and recall high. If you increase precision, it will reduce recall, and vice versa.</li></ul><p id="fa28daf5-c936-4ef7-b570-23d8241b3015" class="">⇒ &quot;Generally&quot; if you increase the threshold, precision will increase</p><p id="6448bf97-b4cb-4d04-bc4d-484b9244f1ce" class="">
+</p><p id="f1051a8e-6655-4ef8-86dd-6622b242e113" class="">4. Receiver Operating Characteristic (ROC) curve<div class="indented"><p id="94950e1a-32fd-4bc9-917b-dc881153915a" class="">→ True positive rate vs False positive rate</p><p id="42996733-6cd6-4fb5-8cc1-779d499847ee" class="">→ Sensitivity (recall) vs. (1- specificity)</p><p id="f7963c20-4b3a-4215-9b13-ef45a265605a" class="">Measure the area under the curve( ROC AUC )</p></div></p><p id="00f6b1dc-2f5a-4e95-ba28-de5b249a6805" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e02b309c-6ab8-4ff1-90ab-82cbcf6e9db3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Use the precision-recall curve whenever the positive class is rare or when you care more about the false positives than the false negatives. Otherwise ROC.</div></figure><p id="835cc35b-4caa-46c7-a94a-7c8c0e0cdc60" class="">
+</p><h2 id="151c2c28-8112-4261-8538-2e825d9cc32c" class=""><mark class="highlight-yellow">Random Forest Classifier</mark></h2><p id="a4be561d-6406-4bf8-b5c3-e0c4b923b69d" class="">→ plot the roc_curve for RFC<div class="indented"><p id="112eea3d-e716-481a-8982-2f588a1738f8" class="">The graph is better than SGD as it is towards top left corner and ROC AUC is higher</p></div></p><p id="7272b149-f7bb-40b8-90bb-dda079e03f0e" class="">
+</p><p id="13644508-2617-4246-81ee-c033851c4ec7" class="">
+</p><h1 id="1df2d9c6-b6d6-4813-836f-e65016f6c2e8" class=""><mark class="highlight-red">Multiclass/Multinomial Classification</mark></h1><p id="62708cd7-6c62-484b-9056-03188b974925" class="">→ SGD</p><p id="ca5b4338-d387-4300-9b32-bd0b66ac7257" class="">→ Random Forest</p><p id="4b996fd0-7b1d-43c4-9c5d-7a11fac83722" class="">→ Naive Bayes</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4269b8ae-871d-4005-bce9-18310a0a5c61"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Strictly binary classifications: Support Vector Machines and Linear Regression</div></figure><p id="e0deaf91-6dd3-4ead-bd69-0cabd4066d70" class="">
+</p><p id="c17c3442-69bf-4642-a1fa-3022179f7b6c" class=""><mark class="highlight-teal">2 Approaches:</mark></p><ul id="8922c9d6-9582-4030-9642-c027a551cc41" class="bulleted-list"><li>OvR - One vs Rest : One Binary classifier for each class {preferred mostly}</li></ul><ul id="b9973811-0fb3-4644-aad0-0d408f68a35c" class="bulleted-list"><li>OvO - One vs One: One binary classifier for each pair [ (n*(n-1))/2 ] { preferred in algos that do not scale with large data like SVM }</li></ul><p id="56f3e3b0-b0da-41d1-8616-01ea7aa5f22f" class="">
+</p><h1 id="ac085e34-2137-47c4-8745-6247d8f64dd9" class=""><mark class="highlight-red">Multilabel Classification</mark></h1><p id="65812659-1b03-4283-aa87-eee5bcc4dffd" class="">Output can be multiple classes for a single instance.</p><p id="61a95f18-0259-4c16-82b4-d1775d9f4bd0" class="">eg. Face recognition: detecting several faces in an image</p><p id="a305ab9a-2717-4927-b996-410f8b655647" class="">
+</p><p id="a0850e62-7f65-43aa-b7fb-fd4b8ac8d8de" class="">→ In MNIST : Predicting Odd numbers <span style="border-bottom:0.05em solid">and</span> numbers greater than 6</p><p id="c6e0b56c-add6-4a04-a9fe-522c342604c4" class="">
+</p><h2 id="7f33a29b-ce3d-4633-9a80-af97506d87a0" class=""><mark class="highlight-yellow">k-Nearest Neighbours</mark></h2><p id="6b7cc870-9e1f-49ac-9455-594fbfe17df0" class="">→ distance based similarity</p><h3 id="7d1c50af-64cc-4be8-9e37-14417c0ee37a" class=""><mark class="highlight-blue">→ Evaluation</mark></h3><p id="a7a2e852-a6f0-4030-a36e-b21735558af5" class="">→ F1 Score for each label<div class="indented"><p id="91774ecb-c68e-46fc-9ff9-43093bb68da3" class="">Use weights/supports for labels if labels are not equally important</p><p id="a1b01838-58c5-4fc6-b1f1-1b2265aa09b1" class="">
+</p></div></p><h1 id="6e37cc8b-2759-4e20-a20b-9b16ce89ced7" class=""><mark class="highlight-red">Multioutput Classification:</mark></h1><p id="c8375754-7764-486d-8c2b-5472087e4986" class="">Generalization of multilabel:<div class="indented"><p id="d6baa7e7-2608-41c0-80d8-0cc16964f855" class="">Each label can have multiple classes</p></div></p><p id="e5c717ae-4f55-4bc9-b690-332c9437fe52" class="">
+</p><p id="9ecac4e3-9008-4dae-8c08-1410233b032a" class="">Eg. Noise detection in an image<div class="indented"><p id="209d4a7e-1d69-4a1b-8d6a-ce775405493c" class="">Multilabel = one label per pixel</p><p id="e7a7300d-849f-4783-9b4f-d6d4a0524516" class="">Multiclass = multiple value for each label (0-255)</p></div></p></div></article></body></html>

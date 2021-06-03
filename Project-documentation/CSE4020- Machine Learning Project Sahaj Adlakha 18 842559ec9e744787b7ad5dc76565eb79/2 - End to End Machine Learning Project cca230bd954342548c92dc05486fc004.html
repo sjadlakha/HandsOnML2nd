@@ -1,0 +1,628 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2 - End to End Machine Learning Project</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cca230bd-9543-4254-8c92-dc05486fc004" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://res.cloudinary.com/springboard-images/image/upload/w_1080,c_limit,q_auto,f_auto,fl_lossy/wordpress/2019/02/sb-blog-ai.png"/></div><h1 class="page-title">2 - End to End Machine Learning Project</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><nav id="5ab1d660-71d2-4d6d-90ce-1098f2230554" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8efd9696-d85d-41c7-978b-1850c7df85e2">Steps:</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d324a189-5428-487e-bd22-6a4e14efc7e1"><mark class="highlight-orange">1. Look at the big picture</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#32ae7039-f030-44dd-9472-bb7aeb9c68b8">2. Get the data</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#09e53d14-9c5a-4808-8d93-6cf18e263652">3. Discover and visualize the data to gain insights</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#30784178-cf15-4326-80b9-72fc5e876271">4. Prepare the data for ML algorithms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d5ce82fe-c2e6-4acd-b700-581f8c315f46">5. Select a model to train it {Notebook}</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#18d59880-dfa0-4d6b-bbea-18d46818cd00">6. Fine-tune your model.</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8bad8c57-bb02-4b2b-a243-60758a3e2509">7. Present you solution</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9073332c-1967-4c13-bcc8-c80f9082d98a">8. Launch, monitor and maintain your system.</a></div></nav><h1 id="8efd9696-d85d-41c7-978b-1850c7df85e2" class="">Steps:</h1><h2 id="d324a189-5428-487e-bd22-6a4e14efc7e1" class=""><mark class="highlight-orange">1. Look at the big picture</mark></h2><p id="8f6496d8-939b-4f4d-a37a-4124b1160273" class=""><mark class="highlight-blue">→Frame the problem:</mark> </p><ul id="aac70e28-6720-4c93-98d2-3473b217a678" class="bulleted-list"><li>Is it supervised / unsupervised/ reinforcement?</li></ul><ul id="1a94a3d3-41ed-4378-86b3-9c33eb9e9994" class="bulleted-list"><li>Is it a classification task/ regression task</li></ul><ul id="4e6fa217-6bef-4d4d-8a0d-4fd43a9cf26e" class="bulleted-list"><li>Should you use online-learning or batch learning</li></ul><p id="cb5684ef-e570-4d74-8f79-bcb8dda24013" class="block-color-blue">→Select a Performance Measure:</p><ul id="84b0248e-69a4-48a3-9a18-45d309bb51a4" class="bulleted-list"><li>RMSE</li></ul><ul id="c0ace920-e8fb-4d40-b075-0e408f2295b6" class="bulleted-list"><li>MAE - when there are many outliers</li></ul><ul id="88784dad-30c2-4701-874d-551d4f71d4f2" class="bulleted-list"><li>Distance measures (lk norm)</li></ul><p id="183cc0b7-0b94-48fc-ac66-7c6840739556" class=""><mark class="highlight-blue">→ Check the assumptions</mark></p><h2 id="32ae7039-f030-44dd-9472-bb7aeb9c68b8" class="block-color-orange">2. Get the data</h2><p id="acc8674e-1de4-43f7-8829-22e61944b564" class=""><mark class="highlight-blue">→ Create the workspace</mark></p><ul id="39a569f3-ddc8-4d3e-9c27-6ab324b6e3fe" class="bulleted-list"><li>Preferably a virtual and isolated env</li></ul><p id="df641ec3-03dd-47d3-b169-84983859fcc1" class=""><mark class="highlight-blue">→ Download the data</mark></p><p id="cfa8cba6-e34f-4fee-8bd2-0eb52fcb4b46" class="block-color-blue">→ Take a look at the data structure</p><p id="12ab2e06-2ed9-4501-8e3e-e6e18ac1c285" class="block-color-blue"><code>→ Train test Split {Notebook}</code>( stratified sampling )</p><h2 id="09e53d14-9c5a-4808-8d93-6cf18e263652" class="block-color-orange">3. Discover and visualize the data to gain insights</h2><p id="31dd7b0d-ee0d-4485-ad86-c8d6087292cb" class="block-color-blue">→ Create visualisations</p><p id="cdbf286c-ebb8-4b75-a15e-d9760dea3bbc" class="block-color-blue">→ Look for correlations</p><p id="42541439-0eeb-4f8f-8cea-391f8dd82432" class="block-color-blue">→ Experiment with attribute combinations</p><h2 id="30784178-cf15-4326-80b9-72fc5e876271" class="block-color-orange">4. Prepare the data for ML algorithms</h2><p id="6c03c8da-3f2b-4aa6-9902-c90b3b4cf969" class=""><mark class="highlight-blue">→ Data cleaning</mark></p><ul id="864bb7e5-06c8-4e84-9e23-f7711bda5ab9" class="bulleted-list"><li><code>Missing data {Notebook - SimpleImputer}</code></li></ul><p id="af127894-935a-44e5-bab9-04b4ed4a201e" class="block-color-blue">→ Handling text and categorical data</p><ul id="d32f64ab-08ee-4f65-afe6-a921b4e1941c" class="bulleted-list"><li>ordinalencoder</li></ul><ul id="9af8310e-20a0-4a17-98e5-fb264d87269e" class="bulleted-list"><li>onehotencoder</li></ul><ul id="c8f7d01c-3b5d-4808-a3a4-b9da04ea3fda" class="bulleted-list"><li><code>Custom transformers {utils.py}</code></li></ul><p id="4d295b82-372c-4440-957e-1d3595dbb900" class=""><mark class="highlight-blue">→ Feature Scaling</mark></p><ul id="48eb0e1d-be67-4197-85a9-a129cb10ee30" class="bulleted-list"><li>min-max</li></ul><ul id="e6cc49ec-9311-41a0-9fae-f1bd310e70ca" class="bulleted-list"><li>standardization</li></ul><p id="95b06797-e591-4d44-ad46-a842dae767b6" class=""><mark class="highlight-blue">→ Transformation Pipelines</mark> <code>{Notebook}</code></p><ul id="9834f89d-3e1e-45a4-ac39-a8a57c25fb60" class="bulleted-list"><li>Helps in preserving the order of multiple tasks that need to be performed</li></ul><h2 id="d5ce82fe-c2e6-4acd-b700-581f8c315f46" class="block-color-orange">5. Select a model to train it {Notebook}</h2><p id="b2396e81-956b-43ef-9760-674b4abcf6e5" class=""><mark class="highlight-blue">→ Training and Evaluating on the Training set</mark></p><ul id="332c465c-7a3d-40f1-b259-497cdb072d35" class="bulleted-list"><li>Try various models and compare their performance</li></ul><p id="50877bc9-6526-41a7-98f6-4df298c87219" class=""><mark class="highlight-blue">→ Cross Validation {Notebook}</mark></p><ul id="44590715-1f21-4538-ad59-ca75a7f6ccf6" class="bulleted-list"><li>Great way to detect overfitting</li></ul><p id="cb542954-dbb2-49f1-9638-0ac1a7477820" class=""><mark class="highlight-blue">→ Save a model (joblib/pickle)</mark></p><h2 id="18d59880-dfa0-4d6b-bbea-18d46818cd00" class="block-color-orange">6. Fine-tune your model.</h2><p id="fcb6e5b5-deea-4d25-9ca6-e54126e87087" class=""><mark class="highlight-blue">→ Hyperparameter tuning:</mark></p><ul id="1ef4f698-e794-4299-b1f7-e545664aebc8" class="bulleted-list"><li>Grid Search - get the best features, feature importance and much more</li></ul><ul id="fc53f7d8-cdf0-453e-a102-69c6bc6116ae" class="bulleted-list"><li>Randomized Search<ul id="0c053dcf-e643-4625-ac26-2d35426abc09" class="bulleted-list"><li>For a larger hyperparameter space</li></ul><ul id="f5fe0eb2-a867-42dd-953d-677229d0ffd9" class="bulleted-list"><li>In every iteration a random value is chosen for every hyperparameter and then the best ones are picked</li></ul></li></ul><ul id="260c5dc0-5617-4a21-89ea-9a5408ff6049" class="bulleted-list"><li>Ensemble Methods<ul id="d720c36f-83ae-4d50-9071-662f5a6bd882" class="bulleted-list"><li>Combining the models that performed best</li></ul><ul id="4d1e1fa9-7535-4fd4-a6e7-e5eba1087c79" class="bulleted-list"><li>eg. Random forests</li></ul></li></ul><h2 id="8bad8c57-bb02-4b2b-a243-60758a3e2509" class="block-color-orange">7. Present you solution</h2><ul id="fc6d6a26-a396-4b03-b3ea-2b138bff989a" class="bulleted-list"><li>Before presenting test your system on the test set </li></ul><ul id="27b4cebd-2840-48c0-96f1-b7cf9406cf02" class="bulleted-list"><li>Document everything with<ul id="66049cfb-d252-45b1-9e97-a5746fe03e63" class="bulleted-list"><li>Clear Visualisations</li></ul><ul id="ff74820a-d1e9-43a5-a7b4-2aa28df99460" class="bulleted-list"><li>Easy-to-remember Statements</li></ul></li></ul><h2 id="9073332c-1967-4c13-bcc8-c80f9082d98a" class="block-color-orange">8. Launch, monitor and maintain your system.</h2><ul id="8610a0fd-989f-4c1f-93fb-28356eb5d441" class="bulleted-list"><li>Polish the code</li></ul><ul id="c2c3db7d-41c1-4d3d-9a17-34a833d34724" class="bulleted-list"><li>Write Documentation</li></ul><ul id="d3909ca9-4ef7-468b-aa14-e4431393e112" class="bulleted-list"><li>Write tests</li></ul><ul id="c29e392e-70ae-436c-8bd1-f315e1919c64" class="bulleted-list"><li>Reuse the model<ol id="ff958fdc-e260-4e1b-88bf-d6704cdc2fcc" class="numbered-list" start="1"><li>Save and load it in another project</li></ol><ol id="e323db95-67ee-4464-af57-7822418cf04d" class="numbered-list" start="2"><li>Wrap the model in a web service that an application can query through REST API</li></ol><ol id="64f3e9f0-eed0-4537-aea2-46f21f0a319e" class="numbered-list" start="3"><li>Deploy the model on cloud and make use of the cloud service provider API</li></ol></li></ul><ul id="74091997-3c4e-4460-b835-3173b652982f" class="bulleted-list"><li>Don&#x27;t let the models &quot;rot&quot;<ul id="c2ae31b3-1d6d-41f3-ac58-f1d9d828c317" class="bulleted-list"><li>Take human help to detect any bugs or performance degradation</li></ul><ul id="ba3cdc6c-dfd9-4679-8180-8665e19fb380" class="bulleted-list"><li>Automate tasks like collecting and loading fresh data</li></ul><ul id="fcf5d78c-6dd7-419b-8eca-b48194bc40e1" class="bulleted-list"><li>Keep backups of all models</li></ul></li></ul></div></article></body></html>
